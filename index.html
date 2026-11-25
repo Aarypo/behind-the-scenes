@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Behind the Gates</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Manrope:wght@500;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE an editorial field report: quiet, exact, a little literary
+   IDEA a printed flagship report on warm paper, chapters and findings, an engraved object tagged with a question card
+   PICTURE an engraved drain cover from the basement of Site A, tied with red string to a tag of questions
+   COLOUR paper #f1ece1, ink #1b1a17, red string #c23b2b, teal action #37798a; water teal, waste olive, smell ochre
+   TYPE Fraunces light (display), Newsreader (text), Manrope (small labels)
+   LAYOUT huge title across the top, standfirst and ways in, picture beneath; phone: title, standfirst, picture, tag below */
+:root{color-scheme:light;--paper:#f1ece1;--paper2:#e8e1d2;--card:#faf7f0;--ink:#1b1a17;--mute:#5e5a52;--rule:#cfc6b4;--red:#c23b2b;--teal:#37798a;--water:#37798a;--waste:#6d7a3a;--smell:#c0802e}
+*{box-sizing:border-box;min-width:0}
+html{scroll-padding-top:64px;scroll-behavior:smooth;overflow-x:clip}
+body{margin:0;background:var(--paper);color:var(--ink);font:18px/1.6 Newsreader,Georgia,serif;overflow-x:clip}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:300;line-height:1.05;letter-spacing:-.02em;text-wrap:balance;margin:0}
+h2{font-size:clamp(34px,4.6vw,56px);margin-bottom:10px}
+h3{font-size:clamp(22px,2.2vw,28px);font-weight:400;margin-bottom:8px}
+p{margin:0 0 16px}
+a{color:inherit}
+.lab{font:600 12px/1.3 Manrope,system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:max(4vw,16px)}
+.text{max-width:68ch}
+header.top{position:sticky;top:0;z-index:9;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(6px)}
+header.top .wrap{display:flex;justify-content:flex-end;align-items:center;gap:6px 22px;padding-block:12px;overflow-x:auto;white-space:nowrap}
+header.top a{flex:none;font:500 15px Manrope,sans-serif;text-decoration:none;padding:6px 0}
+header.top a:hover,header.top a:focus-visible{text-decoration:underline}
+header.top a.box{border:1px solid var(--ink);padding:7px 12px}
+.brand{margin-right:auto;font:400 20px Fraunces,serif}
+.cover{padding-top:clamp(8px,2vw,28px)}
+.cover h1{font-size:clamp(54px,11.2vw,150px);line-height:.95;letter-spacing:-.035em}
+.stand{display:grid;grid-template-columns:minmax(0,1fr);margin-top:clamp(20px,3vw,40px)}
+.stand .sub{font-size:clamp(21px,2vw,25px);margin-bottom:8px}
+.stand .dek{max-width:58ch;color:#38352f}
+.ways{display:flex;flex-wrap:wrap;gap:18px 34px;align-items:flex-start;margin-top:10px}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--teal);color:#fff;text-decoration:none;font:600 18px Manrope,sans-serif;padding:14px 22px;min-height:48px;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%)}
+.btn:hover{background:#2d6675}
+.way{text-decoration:none;display:inline-block}
+.way b{font:500 18px Manrope,sans-serif;border-bottom:1px solid var(--ink)}
+.way .lab{display:block;color:var(--mute);margin-top:6px;font-weight:500}
+.pic{position:relative;aspect-ratio:1600/700;margin:clamp(8px,2vw,24px) 0 clamp(20px,5vw,70px)}
+.pic svg{position:absolute;inset:0;width:100%;height:100%}
+.tag{position:absolute;left:calc(70.5% - 26px);top:calc(47% - 22px);width:clamp(230px,22vw,290px);background:var(--card);border:1px solid #8d8574;padding:30px 20px 14px;transform:rotate(-4deg);transform-origin:26px 22px;box-shadow:3px 4px 0 rgba(27,26,23,.08);clip-path:polygon(14px 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%,0 14px)}
+.tag::before{content:"";position:absolute;left:19px;top:15px;width:14px;height:14px;border-radius:50%;border:2px solid #8d8574;background:var(--paper)}
+.tag .lab{display:block;border-bottom:1.5px solid var(--ink);padding-bottom:6px;margin-bottom:2px}
+.tag ul{list-style:none;margin:0;padding:0}
+.tag li{border-bottom:1px solid var(--rule)}
+.tag a{display:block;text-decoration:none;font-size:17px;padding:5px 0}
+.tag a:hover,.tag a:focus-visible{color:var(--red)}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;padding-block:22px 34px;border-bottom:1px solid var(--rule)}
+.foot span+span{margin-left:22px;color:var(--mute)}
+.ch{padding-block:clamp(48px,7vw,104px);border-bottom:1px solid var(--rule)}
+.chhead{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:12px 48px;align-items:end;margin-bottom:clamp(26px,4vw,48px)}
+.chhead .lab{display:block;margin-bottom:12px}
+.chhead .lab span{color:var(--mute)}
+.scene{font-style:italic;color:var(--mute);margin:0;max-width:52ch}
+.by{font:500 13px Manrope,sans-serif;color:var(--mute);margin-top:12px}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px 56px}
+.pull{font-family:Fraunces,serif;font-weight:300;font-size:clamp(30px,4.4vw,54px);line-height:1.1;letter-spacing:-.02em;text-wrap:balance;max-width:20ch;margin:clamp(40px,6vw,80px) 0 0}
+.pull em{font-style:normal;color:var(--red)}
+.sites{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1.5px solid var(--ink);margin-top:28px}
+.sites div{padding:18px 22px 6px 0}
+.sites div+div{border-left:1px solid var(--rule);padding-left:22px}
+.sites .code{font:300 44px/1 Fraunces,serif;display:block;margin-bottom:6px}
+.sites p{font-size:16px}
+.aside{font-size:16px;color:var(--mute);border-left:2px solid var(--red);padding-left:14px;max-width:70ch}
+.finding{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:24px 56px;align-items:start;padding-block:36px;border-top:1px solid var(--rule)}
+.fhead{display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px}
+.fnum{font:300 64px/.9 Fraunces,serif;color:var(--red)}
+.fhead h3 b{font-weight:400;color:var(--mute)}
+.fhead p{font-size:17px}
+.fig{background:var(--card);border:1px solid var(--rule);padding:22px 24px 16px}
+.fig .big{font:300 clamp(56px,7vw,86px)/1 Fraunces,serif;margin:8px 0 6px;letter-spacing:-.03em}
+.fig .big small{font-size:.38em;margin-left:6px;color:var(--mute)}
+.fig p{font-size:16px}
+.pict{display:flex;flex-wrap:wrap;gap:10px;margin:6px 0 12px}
+.cite{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center;border-top:1px solid var(--rule);padding-top:10px;font:500 13px Manrope,sans-serif;color:var(--mute)}
+.cite b{color:var(--ink);font-weight:600}
+.copy{margin-left:auto;font:600 13px Manrope,sans-serif;background:none;border:1px solid var(--ink);color:var(--ink);min-height:36px;padding:0 12px;cursor:pointer}
+.copy:hover,.copy:focus-visible{background:var(--ink);color:var(--card)}
+.maps{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:20px}
+.mapbox{background:var(--card);border:1px solid var(--rule);padding:18px 18px 12px;display:flex;flex-direction:column}
+.mapbox h3{font-size:22px;margin:0}
+.mapbox .lab{color:var(--mute);margin:4px 0 0}
+.mfig{position:relative;min-height:380px;flex:1}
+.mfig>svg{position:absolute;inset:0;width:100%;height:100%}
+.mfig svg text{font:500 14px Newsreader,serif;paint-order:stroke;stroke:var(--card);stroke-width:5px}
+.key{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:16px;font:500 14px Manrope,sans-serif;color:var(--mute)}
+.key span{display:inline-flex;align-items:center;gap:7px}
+.dot{width:11px;height:11px;border-radius:50%;flex:none;border:1.5px solid var(--ink)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px}
+.filters button{font:600 14px Manrope,sans-serif;min-height:44px;padding:0 16px;border:1px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer}
+.filters button[aria-pressed=true]{background:var(--ink);color:var(--paper)}
+button:focus-visible,a:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:30px 22px}
+figure{margin:0}
+.ph{background:var(--card);padding:10px 10px 0;border:1px solid var(--rule)}
+.ph img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;display:block;filter:saturate(.82) contrast(1.02)}
+figure.wide .ph img{aspect-ratio:4/3}
+figure.hit .ph{outline:2px solid var(--red);outline-offset:3px}
+figcaption{padding:12px 2px 0;font-size:16px;line-height:1.45}
+figcaption .lab{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 8px;color:var(--mute);margin-bottom:6px}
+figcaption i{font-style:italic}
+figcaption .copy{margin:10px 0 0;min-height:32px;font-size:12px}
+.k{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.bins{display:flex;gap:14px;flex-wrap:wrap;margin:6px 0 12px}
+.bins figure{text-align:center;font:500 13px Manrope,sans-serif;color:var(--mute)}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:16px}
+th,td{text-align:left;vertical-align:top;padding:12px 14px 12px 0;border-bottom:1px solid var(--rule)}
+th{font:600 12px Manrope,sans-serif;letter-spacing:.08em;text-transform:uppercase;border-bottom:1.5px solid var(--ink)}
+td.k{font-style:italic;white-space:nowrap;padding-right:24px}
+ol,ul{padding-left:1.2em;margin:0 0 16px}
+li{margin-bottom:10px}
+.steps{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0 48px;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:44px minmax(0,1fr);border-top:1px solid var(--rule);padding:16px 0 6px;margin:0}
+.steps li::before{content:counter(s);font:300 30px/1 Fraunces,serif;color:var(--red)}
+.steps b{display:block;font:400 21px Fraunces,serif;margin-bottom:4px}
+.steps p{font-size:16px;margin:0 0 10px}
+.dh{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 40px}
+.dh div{border-top:1.5px solid var(--ink);padding:14px 0 8px}
+.dh p{font-size:16px}
+.team{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1.5px solid var(--ink)}
+.team div{padding:20px 20px 10px 0}
+.team div+div{border-left:1px solid var(--rule);padding-left:20px}
+.team b{display:block;font:300 34px/1.1 Fraunces,serif;margin-bottom:6px}
+.team span{font-size:16px;color:var(--mute)}
+.refs{list-style:none;padding:0}
+.refs li{font-size:16px;padding-left:2em;text-indent:-2em}
+footer{padding-block:40px 56px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 32px;font-size:16px;color:var(--mute)}
+footer b{font:400 24px Fraunces,serif;color:var(--ink)}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--ink);color:var(--paper);font:500 14px Manrope,sans-serif;padding:10px 16px;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.on{opacity:1}
+@media(max-width:900px){.chhead,.two,.finding,.maps{grid-template-columns:minmax(0,1fr)}.dh{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.team{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.team div:nth-child(3){border-left:0;padding-left:0}}
+@media(max-width:700px){.pic{aspect-ratio:auto}.pic svg{position:relative;display:block;height:auto}.pic svg .farstring{display:none}.tag{position:relative;left:auto;top:auto;margin:10px 0 0 auto;transform:rotate(-2deg)}.brand{display:none}header.top .wrap{justify-content:flex-start}.sites{grid-template-columns:minmax(0,1fr)}.sites div+div{border-left:0;padding-left:0;border-top:1px solid var(--rule)}}
+@media(max-width:600px){body{font-size:17px}.dh,.team{grid-template-columns:minmax(0,1fr)}.team div+div{border-left:0;padding-left:0;border-top:1px solid var(--rule)}.gallery{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px 12px}figcaption{font-size:15px}table{font-size:14px}.stack thead{display:none}.stack tr{display:grid;padding-block:10px;border-bottom:1px solid var(--rule)}.stack td{border:0;padding:2px 0}.stack td::before{content:attr(data-l)": ";font:600 12px Manrope,sans-serif;color:var(--mute)}.mfig{min-height:320px}.foot span+span{margin-left:12px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.toast{transition:none}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+<span class="brand">Behind the Gates</span>
+<a href="#ch1">Read the proposal</a><a href="#ch2">Walk the sites</a><a href="#evidence">See the evidence</a><a class="box lab" href="#team">The team</a>
+</div></header>
+
+<main>
+<section class="cover wrap" aria-label="Cover">
+<h1>Behind the Gates</h1>
+<div class="stand">
+<p class="sub">Waste, drains and segregation in Akshaya Nagar</p>
+<p class="dek">We followed the waste from the lobby to the basement of three gated complexes in south Bengaluru, and recorded what the gate keeps out of sight.</p>
+<div class="ways">
+<a class="btn" href="#evidence">See the evidence <span aria-hidden="true">↓</span></a>
+<a class="way" href="#ch2"><b>Walk the sites →</b><span class="lab">8 stops, about 3 minutes</span></a>
+<a class="way" href="#ch1"><b>Read the proposal →</b><span class="lab">7 chapters, about 12 minutes</span></a>
+</div>
+</div>
+<div class="pic">
+<svg viewBox="0 0 1600 700" preserveAspectRatio="xMidYMid meet" role="img" aria-label="An engraved drawing of a square concrete drain cover with circular rings, tied through its lifting hole with a red string.">
+<defs>
+<pattern id="h1" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(35)"><line x1="0" y1="0" x2="0" y2="6" stroke="#1b1a17" stroke-width="1.1"/></pattern>
+<pattern id="h2" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(-50)"><line x1="0" y1="0" x2="0" y2="4" stroke="#1b1a17" stroke-width="1"/></pattern>
+<pattern id="stip" width="9" height="9" patternUnits="userSpaceOnUse"><circle cx="2" cy="3" r=".9" fill="#1b1a17"/><circle cx="6.5" cy="7" r=".7" fill="#1b1a17"/></pattern>
+<clipPath id="slab"><rect x="-270" y="-270" width="540" height="540" rx="10"/></clipPath>
+</defs>
+<g transform="translate(640 352) rotate(-7)">
+<rect x="-262" y="-252" width="540" height="540" rx="10" fill="#1b1a17" opacity=".14" transform="translate(18 22)"/>
+<rect x="-270" y="-270" width="540" height="540" rx="10" fill="#efe9dc" stroke="#1b1a17" stroke-width="2.5"/>
+<g clip-path="url(#slab)">
+<rect x="-270" y="-270" width="540" height="540" fill="url(#stip)" opacity=".35"/>
+<path d="M270 -120 L270 270 L-120 270 Z" fill="url(#h1)" opacity=".3"/><path d="M270 60 L270 270 L60 270 Z" fill="url(#h1)" opacity=".35"/>
+</g>
+<rect x="-248" y="-248" width="496" height="496" rx="6" fill="none" stroke="#1b1a17" stroke-width="1.4"/>
+<rect x="-240" y="-240" width="480" height="480" rx="4" fill="none" stroke="#1b1a17" stroke-width=".8" opacity=".6"/>
+<g id="rings"></g>
+<circle cx="0" cy="-205" r="15" fill="#1b1a17"/>
+<circle cx="0" cy="205" r="15" fill="#1b1a17"/>
+<rect x="-6" y="-207" width="12" height="6" fill="#efe9dc"/>
+<rect x="-6" y="201" width="12" height="6" fill="#efe9dc"/>
+</g>
+<g fill="none" stroke="#c23b2b" stroke-width="3.2" stroke-linecap="round">
+<path d="M640 147 c-26 -28 -58 -40 -48 -78 c8 -30 46 -26 44 4 c-2 22 -18 40 4 74"/>
+<path d="M640 147 c22 -34 62 -46 56 -84 c-5 -28 -44 -24 -40 6 c3 22 14 44 -16 78"/>
+<path d="M641 150 c10 22 -4 44 12 56"/>
+<path class="farstring" d="M648 160 C 760 170, 860 120, 960 210 S 1080 340, 1128 329"/>
+</g>
+</svg>
+<div class="tag">
+<span class="lab">What does the gate hide?</span>
+<ul>
+<li><a href="#ch3">Who sorts it?</a></li>
+<li><a href="#ch2">Where does the water go?</a></li>
+<li><a href="#evidence">Who smells it?</a></li>
+<li><a href="#ch3">What do the rules ask?</a></li>
+<li><a href="#ch7">Who is counted?</a></li>
+</ul>
+</div>
+</div>
+<div class="foot lab"><div><span>Group proposal</span><span>November 2026</span></div><div>CIA I, Component 2 · English and Digital Humanities</div></div>
+</section>
+
+<section class="ch" id="ch1">
+<div class="wrap">
+<div class="chhead">
+<div><p class="lab">Chapter 1 <span>of 7</span></p><h2>What the gate hides</h2></div>
+<p class="scene">Behind this chapter: a single steel bin under a residents' notice board, in a marble lobby.</p>
+</div>
+<div class="two">
+<div class="text">
+<p>A gated complex shows the street a clean face: a painted gate, a garden, a security desk. Bins, drains and garbage rooms are kept in basements and back corners, and so are the people who sort and carry the waste. This project asks what the gate keeps out of sight.</p>
+<p>Bengaluru now requires every household to separate its waste four ways. We set out to see whether three gated communities in Akshaya Nagar, all within walking distance of each other, have changed their bins, rooms and drains to match.</p>
+<p class="by">Introduction by Rizwan</p>
+</div>
+<div class="text">
+<p><i>Behind the Gates</i> is a digital deep map of how waste and stormwater are handled inside three gated residential complexes. Each stop on the map holds geotagged photographs, a standard observation record, a smell rating and short notes from interviews. A comparison then sets each complex against the four-stream rule.</p>
+<p>Our question is whether a complex that looks well kept actually does what Bengaluru's waste rules require, and what a mapped, photographed, mixed-methods record can show that a walk past the front gate cannot.</p>
+<p class="by">Project description by Aamina</p>
+</div>
+</div>
+<div class="sites">
+<div><span class="code">A</span><p><b>Lake Verandahs, House of Hiranandani</b>, Wings A and B, Akshaya Nagar West. One lobby bin and one basement wheelie bin; an open service drain with a strong smell; a stormwater grating holding water and debris.</p></div>
+<div><span class="code">B</span><p><b>Mahaveer Ridge, Block A.</b> Standing water on a broken concrete slab in the internal driveway, beside a drain cover.</p></div>
+<div><span class="code">C</span><p><b>Mahaveer Ridge / Radiant Shine, Block C.</b> A padlocked waste room clad in sheet metal, holding mixed wheelie bins and an industrial chemical drum used as a bin.</p></div>
+</div>
+<p class="aside" style="margin-top:22px">The camera app labels the Block C waste room as Radiant Shine in one photo and Mahaveer Ridge in another taken about 3 m away. We will confirm which complex it belongs to before the final map is made public.</p>
+<p class="pull">The gate decides what the street sees. <em>The basement holds the rest.</em></p>
+</div>
+</section>
+
+<section class="ch" id="ch2">
+<div class="wrap">
+<div class="chhead">
+<div><p class="lab">Chapter 2 <span>of 7</span></p><h2>The walk</h2></div>
+<p class="scene">Behind this chapter: eight stops on the afternoon of Wednesday 25 November 2026, from 3:07 to 3:55 pm, the day after rain.</p>
+</div>
+<div class="maps">
+<div class="mapbox"><h3>Site A · Lake Verandahs</h3><p class="lab">Six stops · 3:07–3:26 pm</p><div class="mfig"><svg id="mapA" role="img" aria-label="Scaled map of six stops at Site A in the order walked"></svg></div></div>
+<div class="mapbox"><h3>Sites B and C · Mahaveer Ridge</h3><p class="lab">Two stops · 3:50–3:55 pm</p><div class="mfig"><svg id="mapBC" role="img" aria-label="Scaled map of the stops at Sites B and C"></svg></div></div>
+</div>
+<div class="key"><span><i class="dot" style="background:var(--waste)"></i>Waste and bins</span><span><i class="dot" style="background:var(--water)"></i>Water and drainage</span><span><i class="dot" style="background:var(--smell)"></i>Smell and air</span><span><i class="dot" style="background:var(--card)"></i>Entrance</span><span id="gapnote"></span></div>
+<p class="aside" style="margin-top:12px">Each stop is plotted from the GPS stamp on its photographs. Select a stop to see them.</p>
+
+<div class="finding" style="margin-top:36px">
+<div class="fhead"><span class="fnum">1</span><div><h3><b>Finding 1.</b> At Site A, no separated waste streams were visible.</h3><p>Both collection points we reached held a single bin of a single colour, with no labels. Sorting may happen somewhere we could not see. This is a record of what the infrastructure shows, and the interviews will test it.</p></div></div>
+<div class="fig">
+<span class="lab">Streams separated and labelled at Site A's bins</span>
+<p class="big">0<small>of 4 required</small></p>
+<div class="bins" id="bins0"></div>
+<div class="cite"><b>Field observation</b><span>Group count, 25 Nov 2026, stops 5 and 6</span><button class="copy" data-c="Behind the Gates group, field observation, Site A stops 5–6, Akshaya Nagar, Bengaluru, 25 Nov. 2026.">Copy citation</button></div>
+</div>
+</div>
+
+<div class="finding">
+<div class="fhead"><span class="fnum">2</span><div><h3><b>Finding 2.</b> Water and smell gather where the site is lowest.</h3><p>The ramp grating, the basement service channel and the broken driveway slab are all low points or joints in the paving. Standing water there can breed mosquitoes even inside complexes that look well kept.</p></div></div>
+<div class="fig">
+<span class="lab">Stops with standing water or a strong smell</span>
+<p class="big" id="f2big">3<small>of 8 stops</small></p>
+<div class="pict" id="pict2" role="img" aria-label="Eight circles, one per stop; three filled for stops with standing water or a strong smell"></div>
+<div class="cite"><b>Field observation</b><span>One circle is one stop</span><button class="copy" data-c="Behind the Gates group, field observation of eight stops, Akshaya Nagar, Bengaluru, 25 Nov. 2026.">Copy citation</button></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="ch" id="evidence">
+<div class="wrap">
+<div class="chhead">
+<div><p class="lab">Field evidence</p><h2>Seventeen photographs</h2></div>
+<p class="scene">Every image was taken by the group with GPS Map Camera, which stamps the coordinates, address and time. Bystanders have been cropped out. Gathered and written up by the whole group.</p>
+</div>
+<div class="filters" role="group" aria-label="Filter photographs by site">
+<button id="f-all" data-f="all" aria-pressed="true">All 17</button><button id="f-A" data-f="A" aria-pressed="false">Site A</button><button id="f-B" data-f="B" aria-pressed="false">Site B</button><button id="f-C" data-f="C" aria-pressed="false">Site C</button>
+</div>
+<div class="gallery" id="gallery"></div>
+</div>
+</section>
+
+<section class="ch" id="ch3">
+<div class="wrap">
+<div class="chhead">
+<div><p class="lab">Chapter 3 <span>of 7</span></p><h2>Why now</h2></div>
+<p class="scene">Behind this chapter: a padlocked sheet-metal waste room at Block C.</p>
+</div>
+<div class="finding" style="border-top:0;padding-top:0">
+<div class="text">
+<ul>
+<li><b>The rules have just changed.</b> The Solid Waste Management Rules 2026 have applied since April 2026. They require waste to be separated at source into four streams: wet, dry, sanitary and special care. Bengaluru Solid Waste Management Ltd (BSWML) has told every waste generator in the city to comply.</li>
+<li><b>Large complexes carry more of the duty.</b> Big apartment complexes count as bulk waste generators, and the new rules add Extended Bulk Waste Generator Responsibility for them.</li>
+<li><b>There is little evidence from the ground.</b> Almost no one has recorded whether gated communities have changed their bins and rooms to match the rules.</li>
+<li><b>"Segregation" means two things here.</b> Gated communities separate people as well as waste. We look at where the two overlap: who gets the clean lobby and who works in the basement.</li>
+<li><b>It is feasible.</b> The three sites are within about 1.5 km of each other, and the work needs only phones, free GIS tools and online forms.</li>
+</ul>
+<p class="by">Rationale by Rizwan and Aamina</p>
+</div>
+<div class="fig">
+<span class="lab">Streams every generator must separate, since April 2026</span>
+<p class="big">4<small>streams</small></p>
+<div class="bins" id="bins4"></div>
+<p>A bulk waste generator is any building with at least 20,000 sq m of floor area, 40,000 litres of water use a day, or 100 kg of waste a day.</p>
+<div class="cite"><b>Official rule</b><span>SWM Rules 2026, as reported by Deccan Herald and Asianet Newsable, April 2026</span><button class="copy" data-c="Solid Waste Management Rules, 2026 (India), as reported in Deccan Herald and Asianet Newsable, Apr. 2026.">Copy citation</button></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="ch" id="ch4">
+<div class="wrap">
+<div class="chhead">
+<div><p class="lab">Chapter 4 <span>of 7</span></p><h2>Questions, objectives and outcomes</h2></div>
+<p class="by" style="margin:0">By Aamina</p>
+</div>
+<div class="two">
+<div>
+<h3>Four questions</h3>
+<ol>
+<li>How far does the visible waste infrastructure in each complex (bins, labels, rooms, composting) match the four-stream rule?</li>
+<li>Where does stormwater or wastewater collect or smell inside each complex, and how does that relate to ramps, basements and slab joints?</li>
+<li>How do residents and housekeeping staff describe segregation in practice, and where do their accounts differ from what we observed?</li>
+<li>What can a deep map show about hidden urban waste systems that a written report cannot?</li>
+</ol>
+</div>
+<div>
+<h3>Objectives</h3>
+<ol>
+<li>Record and geolocate the waste and drainage infrastructure in three complexes.</li>
+<li>Score each complex against four-stream segregation using one consistent set of indicators.</li>
+<li>Map waterlogging and odour points and link them to how each site is designed.</li>
+<li>Put residents' and staff accounts beside the physical evidence.</li>
+</ol>
+<h3 style="margin-top:22px">Outcomes</h3>
+<p>An interactive deep map, a comparison dashboard, an open CSV dataset with a methods note, and a one-page summary for each residents' welfare association (RWA).</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="ch" id="ch5">
+<div class="wrap">
+<div class="chhead">
+<div><p class="lab">Chapter 5 <span>of 7</span></p><h2>How the data will be gathered</h2></div>
+<p class="scene">Behind this chapter: an open service channel in the basement of Site A, beside a sealed sewer chamber.</p>
+</div>
+<h3>Variables</h3>
+<div class="scroll">
+<table class="stack">
+<thead><tr><th>Type</th><th>Variable</th><th>How it is measured</th></tr></thead>
+<tbody id="vars"></tbody>
+</table>
+</div>
+<h3 style="margin-top:44px">Methods</h3>
+<ol class="steps" id="steps"></ol>
+<h3 style="margin-top:36px">Timeline</h3>
+<div class="scroll"><table>
+<thead><tr><th>Week</th><th>Task</th></tr></thead>
+<tbody>
+<tr><td class="k">1</td><td>Approvals from the course coordinator, the ethics committee and the RWAs</td></tr>
+<tr><td class="k">2</td><td>Second photo round in dry weather; observation checklist at every stop</td></tr>
+<tr><td class="k">2–3</td><td>Resident survey and staff interviews</td></tr>
+<tr><td class="k">3</td><td>Data cleaning, GIS map, smell layer</td></tr>
+<tr><td class="k">4</td><td>Story map, dashboard, publishing on this website</td></tr>
+</tbody>
+</table></div>
+<p class="by">Methods of data collection by Mehvish</p>
+</div>
+</section>
+
+<section class="ch" id="ch6">
+<div class="wrap">
+<div class="chhead">
+<div><p class="lab">Chapter 6 <span>of 7</span></p><h2>Consent and care</h2></div>
+<p class="scene">Behind this chapter: the group outside the Wing B gate, cropped so that only we are shown.</p>
+</div>
+<div class="two">
+<div class="text">
+<p>The course coordinator approves the topic. Because the project involves human participants through surveys and interviews, we will submit it to the university's research ethics committee. We expect it to count as minimal risk.</p>
+<ul>
+<li><b>Access.</b> We will get written or recorded permission from each RWA or facility management before photographing inside again or contacting residents.</li>
+<li><b>Informed consent.</b> Every participant sees a statement of purpose, is told that taking part is voluntary and that they can withdraw, and stays anonymous. We record no names or flat numbers.</li>
+</ul>
+</div>
+<div class="text">
+<ul>
+<li><b>People in photographs.</b> Only group members appear identifiably. Security staff and passers-by are cropped or blurred.</li>
+<li><b>Reputational harm.</b> The public map will refer to the complexes as A, B and C and will describe conditions without blaming anyone. Names stay in the internal dataset only.</li>
+<li><b>Safety.</b> We will not open manholes, enter shafts or handle waste. Everything is observed from shared areas.</li>
+<li><b>Data storage.</b> Raw files are kept in a private shared folder. Only anonymised, aggregated data is published.</li>
+</ul>
+<p class="by">Ethics and IRB by Rizwan</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="ch" id="ch7">
+<div class="wrap">
+<div class="chhead">
+<div><p class="lab">Chapter 7 <span>of 7</span></p><h2>Why it matters</h2></div>
+<p class="by" style="margin:0">By Leah</p>
+</div>
+<div class="two">
+<div class="text">
+<h3>Social impact</h3>
+<ul>
+<li>Gives RWAs evidence tied to a specific drain or bin rather than a general complaint, now that non-compliance brings fines and refused collection.</li>
+<li>Records the work of housekeeping staff, which usually goes unseen.</li>
+<li>Treats standing water and smelling drains as public-health problems inside complexes that look well kept.</li>
+<li>Offers a cheap phone-and-free-software method that other students or residents can repeat.</li>
+</ul>
+</div>
+<div class="text">
+<h3>Research value</h3>
+<p>Most writing on Bengaluru's waste looks at the whole city: landfills, collection contracts, policy. This project works at the scale of individual buildings, in the months right after the rules changed, and that kind of data is rarely collected systematically.</p>
+<p>Because the survey and interviews sit beside the observations, the project can test the difference between what people say about segregation and the infrastructure that actually exists. The map also leaves a baseline that later cohorts can return to.</p>
+</div>
+</div>
+<h3 style="margin-top:40px">Where this sits within Digital Humanities</h3>
+<div class="dh">
+<div><h3>Deep mapping</h3><p>Following Bodenhamer, Corrigan and Harris, the map is layered and open-ended. It brings together photograph, measurement, smell and voice instead of reducing the place to a single dataset.</p></div>
+<div><h3>Data as capta</h3><p>Johanna Drucker argues that humanities data is taken, not simply given. Every GPS-stamped photograph involves a choice about what to frame, and the stamp is metadata that becomes part of the evidence.</p></div>
+<div><h3>Data feminism</h3><p>D'Ignazio and Klein ask who counts and who is counted. We ask whose labour is missing from official compliance data, and whose neighbourhoods get photographed at all.</p></div>
+<div><h3>Discard studies</h3><p>Following Liboiron and Lepawsky, we treat waste as a system of power rather than as litter. The gate, the basement and the padlocked room are design choices about what gets hidden.</p></div>
+<div><h3>The city as a medium</h3><p>Shannon Mattern reads urban infrastructure as something that can be studied like a text. We read drains, louvres and bins the same way.</p></div>
+<div><h3>A methodological commons</h3><p>Kirschenbaum describes DH as a place where methods from different fields meet. Here urban planning, sociology, GIS and close reading come together in one public digital object.</p></div>
+</div>
+<p class="pull">Who sorts the waste is part of the story of the waste. <em>We mean to count them too.</em></p>
+</div>
+</section>
+
+<section class="ch" id="team">
+<div class="wrap">
+<div class="chhead">
+<div><p class="lab">The team</p><h2>Who did what</h2></div>
+<p class="scene" style="font-style:normal">All four of us collected the field evidence on 25 November 2026. Each of us wrote up a different part of the proposal.</p>
+</div>
+<div class="team">
+<div><b>Rizwan</b><span>Introduction, ethics and IRB, evidence</span></div>
+<div><b>Aamina</b><span>Project description, objectives, evidence</span></div>
+<div><b>Mehvish</b><span>Methods of data collection, evidence</span></div>
+<div><b>Leah</b><span>Social impact, DH concepts, references, evidence</span></div>
+</div>
+</div>
+</section>
+
+<section class="ch" id="refs">
+<div class="wrap">
+<div class="chhead"><div><p class="lab">References</p><h2>Works cited</h2></div><p class="by" style="margin:0">Compiled by Leah</p></div>
+<ul class="refs">
+<li>Bodenhamer, David J., John Corrigan, and Trevor M. Harris, editors. <i>Deep Maps and Spatial Narratives</i>. Indiana UP, 2015.</li>
+<li>D'Ignazio, Catherine, and Lauren F. Klein. <i>Data Feminism</i>. MIT Press, 2020.</li>
+<li>Drucker, Johanna. "Humanities Approaches to Graphical Display." <i>Digital Humanities Quarterly</i>, vol. 5, no. 1, 2011.</li>
+<li>Kirschenbaum, Matthew G. "What Is Digital Humanities and What's It Doing in English Departments?" <i>ADE Bulletin</i>, no. 150, 2010.</li>
+<li>Liboiron, Max, and Josh Lepawsky. <i>Discard Studies: Wasting, Systems, and Power</i>. MIT Press, 2022.</li>
+<li>Mattern, Shannon. <i>Code and Clay, Data and Dirt: Five Thousand Years of Urban Media</i>. U of Minnesota P, 2017.</li>
+<li>"New Waste Rules, Old Problems: Bengaluru's 4-Bin Plan Faces Early Heat." <i>Deccan Herald</i>, 2026.</li>
+<li>"Bengaluru Mandates Four-Way Waste Segregation for All Households." <i>Asianet Newsable</i>, 20 Apr. 2026.</li>
+</ul>
+</div>
+</section>
+</main>
+
+<footer><div class="wrap">
+<div><b>Behind the Gates</b><br>A group project by Rizwan, Aamina, Mehvish and Leah</div>
+<div>CIA I, Component 2 · BA English and Digital Humanities, Christ University<br>Photographs © the group, 25 November 2026, taken with GPS Map Camera</div>
+</div></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+{
+const C={waste:'var(--waste)',drain:'var(--water)',smell:'var(--smell)',gate:'var(--card)'};
+const L={waste:'Waste',drain:'Drainage',smell:'Smell and air',gate:'Entrance'};
+const photos=[
+{id:1,s:'A',f:'gate-group',t:'3:07',k:'gate',c:'The group at the Wing B gate of Lake Verandahs.'},
+{id:2,s:'A',f:'a-grating-group',t:'3:11',k:'drain',c:'Stormwater channel at the basement ramp. Water has collected under the grating.'},
+{id:3,s:'A',f:'a-grating-group-2',t:'3:11',k:'drain',c:'The same channel, which runs the length of the ramp approach.'},
+{id:4,s:'A',f:'a-grating-close',t:'3:11',k:'drain',c:'Close-up: standing water, flower and leaf debris, and rust on the frame.'},
+{id:5,s:'A',f:'a-floor-drain',t:'3:12',k:'drain',c:'Floor drain set into a cracked concrete slab.'},
+{id:6,s:'A',f:'a-smoke-shaft',t:'3:17',k:'smell',c:'Smoke outlet shaft louvres in the Wing A basement.'},
+{id:7,s:'A',f:'a-service-drain',t:'3:19',k:'smell',c:'Open service channel beside a sealed sewer chamber and pipe risers.'},
+{id:8,s:'A',f:'a-drain-group',t:'3:20',k:'smell',c:'The smell at this channel was strong enough that all of us covered our noses.'},
+{id:9,s:'A',f:'a-drain-group-selfie',t:'3:21',k:'smell',c:'Group selfie at the channel, recording the odour.',w:1},
+{id:10,s:'A',f:'a-louvres-person',t:'3:22',k:'waste',c:'Louvred enclosure with rusted scaffolding stored behind it.'},
+{id:11,s:'A',f:'a-louvres-scaffold',t:'3:22',k:'waste',c:'Through the louvres: one blue wheelie bin, brooms and buckets.'},
+{id:12,s:'A',f:'a-blue-bin',t:'3:22',k:'waste',c:'The only collection bin at this point. One colour, no stream labels.'},
+{id:13,s:'A',f:'a-lobby-bin',t:'3:26',k:'waste',c:'Wing A lobby: one steel bin under the residents’ notice board.'},
+{id:14,s:'B',f:'b-puddle-wide',t:'3:50',k:'drain',c:'Block A: water standing on a broken concrete slab across the driveway.'},
+{id:15,s:'B',f:'b-puddle-close',t:'3:50',k:'drain',c:'The pooled water reflects the tower above, beside a drain cover.'},
+{id:16,s:'C',f:'c-waste-room-door',t:'3:53',k:'waste',c:'Block C waste room: sheet-metal panels and a padlocked door.'},
+{id:17,s:'C',f:'c-waste-room-open',t:'3:55',k:'waste',c:'Inside: green and blue wheelie bins, mixed, and a reused chemical drum.'}
+];
+const stops={
+A:[
+{n:1,lat:12.873991,lon:77.609842,t:'3:07',k:'gate',p:[1],lab:'Gate',wet:0},
+{n:2,lat:12.874512,lon:77.609975,t:'3:11',k:'drain',p:[2,3,4],lab:'Ramp grating',wet:1},
+{n:3,lat:12.874637,lon:77.609916,t:'3:12',k:'drain',p:[5],lab:'Floor drain',wet:0},
+{n:4,lat:12.874788,lon:77.609409,t:'3:17',k:'smell',p:[6],lab:'Smoke shaft',wet:0,dy:34},
+{n:5,lat:12.874355,lon:77.609571,t:'3:19',k:'smell',p:[7,8,9,10,11,12],lab:'Basement drain and bin',wet:1},
+{n:6,lat:12.874829,lon:77.609288,t:'3:26',k:'waste',p:[13],lab:'Lobby bin',wet:0}
+],
+BC:[
+{n:7,lat:12.862353,lon:77.61403,t:'3:50',k:'drain',p:[14,15],lab:'B: standing water',wet:1},
+{n:8,lat:12.862544,lon:77.613078,t:'3:53',k:'waste',p:[16,17],lab:'C: waste room',wet:0}
+]};
+const toast=document.getElementById('toast');
+const say=m=>{toast.textContent=m;toast.classList.add('on');clearTimeout(say.t);say.t=setTimeout(()=>toast.classList.remove('on'),1800)};
+const copy=async txt=>{try{await navigator.clipboard.writeText(txt);say('Citation copied')}catch(e){say('Copy blocked: select the text instead')}};
+const cit=p=>`Behind the Gates group, photograph ${p.id}, Site ${p.s}, Akshaya Nagar, Bengaluru, 25 Nov. 2026, ${p.t} pm.`;
+/* rings of the drain cover */
+{const g=document.getElementById('rings');let s='';
+[210,196,150,138,92,80,40].forEach((r,i)=>s+=`<circle r="${r}" fill="none" stroke="#1b1a17" stroke-width="${i%2?1:2}"/>`);
+for(let i=0;i<20;i++){const a=i/20*Math.PI*2,c=Math.cos(a),n=Math.sin(a);s+=`<line x1="${(c*150).toFixed(1)}" y1="${(n*150).toFixed(1)}" x2="${(c*196).toFixed(1)}" y2="${(n*196).toFixed(1)}" stroke="#1b1a17" stroke-width="1.6"/>`}
+for(let i=0;i<10;i++){const a=(i+.5)/10*Math.PI*2,c=Math.cos(a),n=Math.sin(a);s+=`<line x1="${(c*92).toFixed(1)}" y1="${(n*92).toFixed(1)}" x2="${(c*138).toFixed(1)}" y2="${(n*138).toFixed(1)}" stroke="#1b1a17" stroke-width="1.6"/>`}
+s+=`<path d="M0 0 m-210 0 a210 210 0 0 0 420 0" fill="url(#h2)" opacity=".22"/><circle r="80" fill="url(#h1)" opacity=".28"/>`;
+g.innerHTML=s}
+/* bins */
+const bin=(col,lab,hollow)=>`<figure><svg width="46" height="58" viewBox="0 0 46 58" aria-hidden="true"><rect x="3" y="6" width="40" height="6" rx="1" fill="${hollow?'none':col}" stroke="#1b1a17" stroke-width="1.5"/><path d="M6 13 L9 54 H37 L40 13 Z" fill="${hollow?'none':col}" stroke="#1b1a17" stroke-width="1.5" ${hollow?'stroke-dasharray="3 3"':''}/><line x1="18" y1="3" x2="28" y2="3" stroke="#1b1a17" stroke-width="2"/></svg><figcaption>${lab}</figcaption></figure>`;
+const streams=[['#6d7a3a','Wet'],['#37798a','Dry'],['#c23b2b','Sanitary'],['#1b1a17','Special care']];
+document.getElementById('bins4').innerHTML=streams.map(s=>bin(s[0],s[1],0)).join('');
+document.getElementById('bins0').innerHTML=streams.map(s=>bin(s[0],s[1],1)).join('');
+const all=[...stops.A,...stops.BC],wet=all.filter(s=>s.wet).length;
+document.getElementById('f2big').innerHTML=`${wet}<small>of ${all.length} stops</small>`;
+document.getElementById('pict2').innerHTML=all.map(s=>`<svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="14" fill="${s.wet?'var(--water)':'none'}" stroke="#1b1a17" stroke-width="1.5"/><text x="17" y="22" text-anchor="middle" font-family="Manrope" font-size="13" fill="${s.wet?'#fff':'#1b1a17'}">${s.n}</text></svg>`).join('');
+/* gallery */
+const g=document.getElementById('gallery');
+g.innerHTML=photos.map(p=>`<figure id="ph${p.id}" data-s="${p.s}"${p.w?' class="wide"':''}><div class="ph"><img src="img/${p.f}.jpg" alt="${p.c.replace(/"/g,'&quot;')}" loading="lazy" width="825" height="1100"></div><figcaption><span class="lab"><span>Fig. ${p.id} · Site ${p.s} · ${p.t} pm</span><span class="k"><i class="dot" style="background:${C[p.k]}"></i>${L[p.k]}</span></span><i>${p.c}</i><br><button class="copy" data-c="${cit(p).replace(/"/g,'&quot;')}">Copy citation</button></figcaption></figure>`).join('');
+document.addEventListener('click',e=>{const b=e.target.closest('.copy');if(b)copy(b.dataset.c)});
+const btns=[...document.querySelectorAll('.filters button')];
+const filt=f=>{btns.forEach(b=>b.setAttribute('aria-pressed',b.dataset.f===f));g.querySelectorAll('figure[data-s]').forEach(el=>{el.style.display=(f==='all'||el.dataset.s===f)?'':'none'})};
+btns.forEach(b=>b.addEventListener('click',()=>filt(b.dataset.f)));
+const go=ids=>{filt('all');g.querySelectorAll('.hit').forEach(x=>x.classList.remove('hit'));ids.forEach(i=>document.getElementById('ph'+i).classList.add('hit'));document.getElementById('ph'+ids[0]).scrollIntoView({block:'center'})};
+/* maps */
+const R=6371000,rad=Math.PI/180;
+const dist=(a,b)=>{const x=(b.lon-a.lon)*rad*Math.cos((a.lat+b.lat)/2*rad),y=(b.lat-a.lat)*rad;return R*Math.hypot(x,y)};
+document.getElementById('gapnote').textContent=`Site A lies about ${(dist(stops.A[0],stops.BC[0])/1000).toFixed(1)} km from Sites B and C. Each panel has its own scale.`;
+const draw=(svg,list)=>{
+const W=svg.clientWidth,H=svg.clientHeight;if(!W||!H)return;
+const mx=Math.cos(list[0].lat*rad)*R*rad,my=R*rad;
+const pts=list.map(s=>({...s,x:s.lon*mx,y:-s.lat*my}));
+const xs=pts.map(p=>p.x),ys=pts.map(p=>p.y);
+const pad={l:34,r:W<520?120:170,t:40,b:50};
+const sx=Math.max(...xs)-Math.min(...xs)||1,sy=Math.max(...ys)-Math.min(...ys)||1;
+const sc=Math.min((W-pad.l-pad.r)/sx,(H-pad.t-pad.b)/sy);
+const ox=pad.l+((W-pad.l-pad.r)-sx*sc)/2-Math.min(...xs)*sc,oy=pad.t+((H-pad.t-pad.b)-sy*sc)/2-Math.min(...ys)*sc;
+pts.forEach(p=>{p.px=p.x*sc+ox;p.py=p.y*sc+oy});
+const opts=[5,10,20,25,50,100,200],step=opts.find(m=>m*sc>W/6)||200,u=step*sc;
+let grid='';for(let x=ox%u;x<W;x+=u)grid+=`<line x1="${x}" y1="0" x2="${x}" y2="${H}" stroke="#1b1a17" stroke-opacity=".07"/>`;
+for(let y=oy%u;y<H;y+=u)grid+=`<line x1="0" y1="${y}" x2="${W}" y2="${y}" stroke="#1b1a17" stroke-opacity=".07"/>`;
+const route=pts.map((p,i)=>(i?'L':'M')+p.px.toFixed(1)+' '+p.py.toFixed(1)).join(' ');
+const marks=pts.map(p=>{const right=p.px<W-pad.r+30,tx=right?p.px+18:p.px-18,an=right?'start':'end',ly=p.py+(p.dy||0);
+return `<g class="stop" tabindex="0" role="button" aria-label="Stop ${p.n}, ${p.lab}, ${p.t} pm, ${p.p.length} photographs" data-p="${p.p.join(',')}" style="cursor:pointer"><circle cx="${p.px}" cy="${p.py}" r="24" fill="transparent"/><circle cx="${p.px}" cy="${p.py}" r="12" fill="${C[p.k]}" stroke="#1b1a17" stroke-width="1.5"/><text x="${p.px}" y="${p.py+4.5}" text-anchor="middle" fill="${p.k==='gate'?'#1b1a17':'#fff'}" style="stroke:none;font:600 12px Manrope,sans-serif">${p.n}</text><text x="${tx}" y="${ly-2}" text-anchor="${an}" fill="#1b1a17">${p.lab}</text><text x="${tx}" y="${ly+15}" text-anchor="${an}" fill="#5e5a52" style="font-size:13px;font-style:italic">${p.t} pm · ${p.p.length} photo${p.p.length>1?'s':''}</text></g>`}).join('');
+svg.innerHTML=grid+`<path d="${route}" fill="none" stroke="#c23b2b" stroke-width="2.2" stroke-dasharray="1 7" stroke-linecap="round"/>`+marks+
+`<g transform="translate(12,${H-20})"><line x1="0" y1="0" x2="${u}" y2="0" stroke="#1b1a17" stroke-width="2"/><line x1="0" y1="-5" x2="0" y2="5" stroke="#1b1a17"/><line x1="${u}" y1="-5" x2="${u}" y2="5" stroke="#1b1a17"/><text x="${u+8}" y="5" fill="#1b1a17">${step} m</text></g>`+
+`<g transform="translate(${W-20},24)"><path d="M0 -14 L6 6 L0 2 L-6 6 Z" fill="#1b1a17"/><text x="0" y="22" text-anchor="middle" fill="#1b1a17" style="font-size:12px">N</text></g>`;
+svg.querySelectorAll('.stop').forEach(el=>{const f=()=>go(el.dataset.p.split(',').map(Number));el.addEventListener('click',f);el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();f()}})});
+};
+const sA=document.getElementById('mapA'),sB=document.getElementById('mapBC');
+const roA=new ResizeObserver(()=>draw(sA,stops.A));roA.observe(sA);
+const roB=new ResizeObserver(()=>draw(sB,stops.BC));roB.observe(sB);
+/* tables */
+const vars=[
+['Independent','Complex (A, B, C): size, age, price tier','Public listings and RWA information'],
+['Independent','Location in the complex: lobby, basement, driveway, waste room','GPS coordinates and a zone tag'],
+['Dependent','Segregation infrastructure','Bins at each point, streams covered (0–4), labels and colour coding'],
+['Dependent','Drainage condition','Standing water and its area, blockage or debris, state of cover or grating'],
+['Dependent','Odour','1–5 intensity scale, rated on site by two members independently'],
+['Dependent','Resident practice and awareness','Survey: self-reported sorting, knowledge of the four-stream rule, collection frequency'],
+['Dependent','Processing','On-site composting; waste vendor named; vendor empanelled with BSWML or not'],
+['Noted','Weather, time of day, days since rain','Logged on every visit']
+];
+document.getElementById('vars').innerHTML=vars.map(r=>`<tr><td data-l="Type" class="k">${r[0]}</td><td data-l="Variable">${r[1]}</td><td data-l="Measured by">${r[2]}</td></tr>`).join('');
+const steps=[
+['Geotagged photography','Every image is stamped with coordinates, address and time. The first 17 were taken on 25 November 2026; a second round in dry weather will revisit the same stops.'],
+['Observation checklist','The same Google Form is filled in at every stop so the three sites compare directly: bins, streams, labels, drain condition, odour score.'],
+['Smell mapping','Following Kate McLean’s sensory maps, odour is rated at fixed stops and plotted as its own layer. Smell is the pollution signal a photograph cannot hold.'],
+['Resident survey','A short anonymous form shared through residents’ WhatsApp groups or notice-board QR codes, with RWA permission. We aim for 20–30 responses per complex.'],
+['Staff interviews','Semi-structured conversations of about 15 minutes with facility managers and housekeeping staff, each with consent. This gives the view of the people who do the sorting.'],
+['Documents','The SWM Rules 2026, BSWML circulars and news coverage, compared against what we observed.'],
+['Mapping and publishing','Points are plotted in QGIS on OpenStreetMap, told as a story in StoryMapJS, embedded here, and published with a clean CSV.']
+];
+document.getElementById('steps').innerHTML=steps.map(s=>`<li><div><b>${s[0]}</b><p>${s[1]}</p></div></li>`).join('');
+}
+</script>
+</body>
+</html>
